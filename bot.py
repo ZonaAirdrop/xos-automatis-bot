@@ -156,7 +156,7 @@ class XOS:
         print(Fore.GREEN + Style.BRIGHT + "    ⚡ XOS BOT Otomatis ⚡")
         print(Fore.CYAN + Style.BRIGHT + "    ────────────────────────────────")
         print(Fore.YELLOW + Style.BRIGHT + "    Zona Airdrop")
-        print(Fore.YELLOW + Style.BRIGHT + " 
+        print(Fore.YELLOW + Style.BRIGHT + " ")
         print(Fore.YELLOW + Style.BRIGHT + "    Group @ZonaAirdr0p")
         print(Fore.CYAN + Style.BRIGHT + "    ────────────────────────────────")
         print(Fore.MAGENTA + Style.BRIGHT + "     Powered by Zona Airdrop ")
