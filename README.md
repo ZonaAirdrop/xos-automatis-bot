@@ -1,5 +1,14 @@
 # xos-automatis-bot
 
+- ➡️ [Register](https://x.ink/A6RUFB)
+- ↪️ [Claim Faucet](https://faucet.x.ink/)
+- ↪️ [Register Domain](https://openid.network/name/)
+- ↪️ [Galxe Quest](https://app.galxe.com/quest/xos/GC7oAtmUzk)
+- ↪️ [2Captcha (Optional)](https://2captcha.com/enterpage)
+- 🛡️ [Guild Access](https://guild.xyz/xos)
+- 🔁 [Swap via DEX](https://dex.x.ink/swap)
+- 
+
 ■ Auto Account Info Detection  
 ■ Proxy Support  
    ├─ Public Proxy via Proxyscrape  
