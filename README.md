@@ -12,7 +12,6 @@
 ■ Auto Wrap & Unwrap  
 ■ Auto Token Swapping  
 ■ Multi-Account Support with Threading  
-.
 
 ## 🔧 How to Use
 
