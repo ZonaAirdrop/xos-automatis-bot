@@ -7,7 +7,8 @@
 - ↪️ [2Captcha (Optional)](https://2captcha.com/enterpage)
 - 🛡️ [Guild Access](https://guild.xyz/xos)
 - 🔁 [Swap via DEX](https://dex.x.ink/swap)
-- 
+
+■ Feature Bot 👇
 
 ■ Auto Account Info Detection  
 ■ Proxy Support  
