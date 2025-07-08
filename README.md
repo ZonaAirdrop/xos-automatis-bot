@@ -30,11 +30,11 @@ pip install -r requirements.txt
 
 📝 **3. Prepare Required Files**
 
-**accounts.txt**
+**.env**
 
 ```
-your_private_key_1
-your_private_key_2
+PRIVATE_KEYS=your_private_key_1,your_private_key_2
+CAPTCHA_KEY=your_2captcha_api_key (Optional)
 ```
 
 **2captcha\_key.txt** *(optional)*
