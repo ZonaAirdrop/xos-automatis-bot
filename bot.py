@@ -61,6 +61,8 @@ class XOS:
         self.USDT_CONTRACT_ADDRESS = "0x2CCDB83a043A32898496c1030880Eb2cB977CAbc"
         self.WIF_CONTRACT_ADDRESS = "0x9c6eEc453821d12B8dfea20b6FbdDB47f7bc500d"
         self.SWAP_ROUTER_ADDRESS = "0xdc7D6b58c89A554b3FDC4B5B10De9b4DbF39FB40"
+        self.LIQUIDITY_ROUTER_ADDRESS = "0x55a4669cd6895EA25C174F13E1b49d69B4481704"
+        
         self.ERC20_CONTRACT_ABI = json.loads('''[
             {"type":"function","name":"balanceOf","stateMutability":"view","inputs":[{"name":"address","type":"address"}],"outputs":[{"name":"","type":"uint256"}]},
             {"type":"function","name":"allowance","stateMutability":"view","inputs":[{"name":"owner","type":"address"},{"name":"spender","type":"address"}],"outputs":[{"name":"","type":"uint256"}]},
@@ -69,6 +71,7 @@ class XOS:
             {"type":"function","name":"deposit","stateMutability":"payable","inputs":[],"outputs":[]},
             {"type":"function","name":"withdraw","stateMutability":"nonpayable","inputs":[{"name":"wad","type":"uint256"}],"outputs":[]}
         ]''')
+        
         self.SWAP_CONTRACT_ABI = [
             {
                 "inputs": [
@@ -128,6 +131,9 @@ class XOS:
                 "type": "function"
             },
         ]
+        
+        self.LIQUIDITY_CONTRACT_ABI = json.loads('''[{"inputs":[{"internalType":"address","name":"_factory","type":"address"},{"internalType":"address","name":"_WETH9","type":"address"},{"internalType":"address","name":"_tokenDescriptor_","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"address","name":"recipient","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"}],"name":"Collect","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint128","name":"liquidity","type":"uint128"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"}],"name":"DecreaseLiquidity","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint128","name":"liquidity","type":"uint128"},{"indexed":false,"internalType":"uint256","name":"amount0","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount1","type":"uint256"}],"name":"IncreaseLiquidity","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"DOMAIN_SEPARATOR","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"PERMIT_TYPEHASH","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"WETH9","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint128","name":"amount0Max","type":"uint128"},{"internalType":"uint128","name":"amount1Max","type":"uint128"}],"internalType":"struct INonfungiblePositionManager.CollectParams","name":"params","type":"tuple"}],"name":"collect","outputs":[{"internalType":"uint256","name":"amount0","type":"uint256"},{"internalType":"uint256","name":"amount1","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"token0","type":"address"},{"internalType":"address","name":"token1","type":"address"},{"internalType":"uint24","name":"fee","type":"uint24"},{"internalType":"uint160","name":"sqrtPriceX96","type":"uint160"}],"name":"createAndInitializePoolIfNecessary","outputs":[{"internalType":"address","name":"pool","type":"address"}],"stateMutability":"payable","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint128","name":"liquidity","type":"uint128"},{"internalType":"uint256","name":"amount0Min","type":"uint256"},{"internalType":"uint256","name":"amount1Min","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"internalType":"struct INonfungiblePositionManager.DecreaseLiquidityParams","name":"params","type":"tuple"}],"name":"decreaseLiquidity","outputs":[{"internalType":"uint256","name":"amount0","type":"uint256"},{"internalType":"uint256","name":"amount1","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"amount0Desired","type":"uint256"},{"internalType":"uint256","name":"amount1Desired","type":"uint256"},{"internalType":"uint256","name":"amount0Min","type":"uint256"},{"internalType":"uint256","name":"amount1Min","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"internalType":"struct INonfungiblePositionManager.IncreaseLiquidityParams","name":"params","type":"tuple"}],"name":"increaseLiquidity","outputs":[{"internalType":"uint128","name":"liquidity","type":"uint128"},{"internalType":"uint256","name":"amount0","type":"uint256"},{"internalType":"uint256","name":"amount1","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"components":[{"internalType":"address","name":"token0","type":"address"},{"internalType":"address","name":"token1","type":"address"},{"internalType":"uint24","name":"fee","type":"uint24"},{"internalType":"int24","name":"tickLower","type":"int24"},{"internalType":"int24","name":"tickUpper","type":"int24"},{"internalType":"uint256","name":"amount0Desired","type":"uint256"},{"internalType":"uint256","name":"amount1Desired","type":"uint256"},{"internalType":"uint256","name":"amount0Min","type":"uint256"},{"internalType":"uint256","name":"amount1Min","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"internalType":"struct INonfungiblePositionManager.MintParams","name":"params","type":"tuple"}],"name":"mint","outputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint128","name":"liquidity","type":"uint128"},{"internalType":"uint256","name":"amount0","type":"uint256"},{"internalType":"uint256","name":"amount1","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"bytes[]","name":"data","type":"bytes[]"}],"name":"multicall","outputs":[{"internalType":"bytes[]","name":"results","type":"bytes[]"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"permit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"positions","outputs":[{"internalType":"uint96","name":"nonce","type":"uint96"},{"internalType":"address","name":"operator","type":"address"},{"internalType":"address","name":"token0","type":"address"},{"internalType":"address","name":"token1","type":"address"},{"internalType":"uint24","name":"fee","type":"uint24"},{"internalType":"int24","name":"tickLower","type":"int24"},{"internalType":"int24","name":"tickUpper","type":"int24"},{"internalType":"uint128","name":"liquidity","type":"uint128"},{"internalType":"uint256","name":"feeGrowthInside0LastX128","type":"uint256"},{"internalType":"uint256","name":"feeGrowthInside1LastX128","type":"uint256"},{"internalType":"uint128","name":"tokensOwed0","type":"uint128"},{"internalType":"uint128","name":"tokensOwed1","type":"uint128"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"refundETH","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"selfPermit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"nonce","type":"uint256"},{"internalType":"uint256","name":"expiry","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"selfPermitAllowed","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"nonce","type":"uint256"},{"internalType":"uint256","name":"expiry","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"selfPermitAllowedIfNecessary","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"selfPermitIfNecessary","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amountMinimum","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"sweepToken","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount0Owed","type":"uint256"},{"internalType":"uint256","name":"amount1Owed","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"uniswapV3MintCallback","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountMinimum","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"unwrapWETH9","outputs":[],"stateMutability":"payable","type":"function"},{"stateMutability":"payable","type":"receive"}]''')
+
         self.proxies = []
         self.proxy_index = 0
         self.account_proxies = {}
@@ -140,6 +146,9 @@ class XOS:
         self.max_swap_amount = 0
         self.min_delay = 0
         self.max_delay = 0
+        self.liquidity_count = 0
+        self.liquidity_amount = 0
+        self.liquidity_token = None
 
     def clear_terminal(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -324,6 +333,44 @@ class XOS:
         )
 
         return from_contract_address, to_contract_address, from_token, to_token
+
+    def generate_liquidity_option(self):
+        liquidity_option = random.choice([
+            "WXOS-BNB", "WXOS-BONK", "WXOS-JUP", "WXOS-PENGU", "WXOS-RAY",
+            "WXOS-SOL", "WXOS-TRUMP", "WXOS-TST", "WXOS-USDC", "WXOS-USDT", "WXOS-WIF"
+        ])
+
+        token_contract_address = (
+            self.BNB_CONTRACT_ADDRESS if liquidity_option == "WXOS-BNB" else
+            self.BONK_CONTRACT_ADDRESS if liquidity_option == "WXOS-BONK" else
+            self.JUP_CONTRACT_ADDRESS if liquidity_option == "WXOS-JUP" else
+            self.PENGU_CONTRACT_ADDRESS if liquidity_option == "WXOS-PENGU" else
+            self.RAY_CONTRACT_ADDRESS if liquidity_option == "WXOS-RAY" else
+            self.SOL_CONTRACT_ADDRESS if liquidity_option == "WXOS-SOL" else
+            self.TRUMP_CONTRACT_ADDRESS if liquidity_option == "WXOS-TRUMP" else
+            self.TST_CONTRACT_ADDRESS if liquidity_option == "WXOS-TST" else
+            self.USDC_CONTRACT_ADDRESS if liquidity_option == "WXOS-USDC" else
+            self.USDT_CONTRACT_ADDRESS if liquidity_option == "WXOS-USDT" else
+            self.WIF_CONTRACT_ADDRESS if liquidity_option == "WXOS-WIF" else
+            self.WXOS_CONTRACT_ADDRESS
+        )
+
+        token_name = (
+            "BNB" if liquidity_option == "WXOS-BNB" else
+            "BONK" if liquidity_option == "WXOS-BONK" else
+            "JUP" if liquidity_option == "WXOS-JUP" else
+            "PENGU" if liquidity_option == "WXOS-PENGU" else
+            "RAY" if liquidity_option == "WXOS-RAY" else
+            "SOL" if liquidity_option == "WXOS-SOL" else
+            "TRUMP" if liquidity_option == "WXOS-TRUMP" else
+            "TST" if liquidity_option == "WXOS-TST" else
+            "USDC" if liquidity_option == "WXOS-USDC" else
+            "USDT" if liquidity_option == "WXOS-USDT" else
+            "WIF" if liquidity_option == "WXOS-WIF" else
+            "WXOS"
+        )
+
+        return self.WXOS_CONTRACT_ADDRESS, token_contract_address, "WXOS", token_name
         
     async def get_web3_with_check(self, address: str, use_proxy: bool, retries=3, timeout=60):
         request_kwargs = {"timeout": timeout}
@@ -530,6 +577,67 @@ class XOS:
                 f"{Fore.RED+Style.BRIGHT} {str(e)} {Style.RESET_ALL}"
             )
             return None, None
+
+    async def perform_add_liquidity(self, account: str, address: str, token0_address: str, token1_address: str, amount0: float, amount1: float, use_proxy: bool):
+        try:
+            web3 = await self.get_web3_with_check(address, use_proxy)
+
+            # Approve both tokens
+            await self.approving_token(account, address, self.LIQUIDITY_ROUTER_ADDRESS, token0_address, amount0, use_proxy)
+            await self.approving_token(account, address, self.LIQUIDITY_ROUTER_ADDRESS, token1_address, amount1, use_proxy)
+
+            liquidity_contract = web3.eth.contract(
+                address=web3.to_checksum_address(self.LIQUIDITY_ROUTER_ADDRESS),
+                abi=self.LIQUIDITY_CONTRACT_ABI
+            )
+
+            # Prepare mint params
+            mint_params = {
+                "token0": web3.to_checksum_address(token0_address),
+                "token1": web3.to_checksum_address(token1_address),
+                "fee": 500,  # 0.05% fee tier
+                "tickLower": -887220,
+                "tickUpper": 887220,
+                "amount0Desired": web3.to_wei(amount0, "ether"),
+                "amount1Desired": web3.to_wei(amount1, "ether"),
+                "amount0Min": 0,
+                "amount1Min": 0,
+                "recipient": address,
+                "deadline": int(time.time()) + 300
+            }
+
+            # Estimate gas
+            estimated_gas = liquidity_contract.functions.mint(mint_params).estimate_gas({
+                "from": address,
+                "nonce": web3.eth.get_transaction_count(address, "pending")
+            })
+
+            max_priority_fee = web3.to_wei(78.75, "gwei")
+            max_fee = max_priority_fee
+
+            # Build transaction
+            tx = liquidity_contract.functions.mint(mint_params).build_transaction({
+                "from": address,
+                "gas": int(estimated_gas * 1.2),
+                "maxFeePerGas": int(max_fee),
+                "maxPriorityFeePerGas": int(max_priority_fee),
+                "nonce": web3.eth.get_transaction_count(address, "pending"),
+                "chainId": web3.eth.chain_id,
+            })
+
+            signed_tx = web3.eth.account.sign_transaction(tx, account)
+            raw_tx = web3.eth.send_raw_transaction(signed_tx.raw_transaction)
+            tx_hash = web3.to_hex(raw_tx)
+            receipt = await asyncio.to_thread(web3.eth.wait_for_transaction_receipt, tx_hash, timeout=300)
+            block_number = receipt.blockNumber
+
+            return tx_hash, block_number
+        except Exception as e:
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Message :{Style.RESET_ALL}"
+                f"{Fore.RED+Style.BRIGHT} {str(e)} {Style.RESET_ALL}"
+            )
+            return None, None
     
     async def print_timer(self):
         for remaining in range(random.randint(self.min_delay, self.max_delay), 0, -1):
@@ -552,23 +660,25 @@ class XOS:
                 print(f"{Fore.WHITE + Style.BRIGHT}2. Claim Faucet{Style.RESET_ALL}")
                 print(f"{Fore.WHITE + Style.BRIGHT}3. Wrap - Unwrap{Style.RESET_ALL}")
                 print(f"{Fore.WHITE + Style.BRIGHT}4. Swap{Style.RESET_ALL}")
-                print(f"{Fore.WHITE + Style.BRIGHT}5. Run All Features{Style.RESET_ALL}")
-                option = int(input(f"{Fore.BLUE + Style.BRIGHT}Choose [1/2/3/4/5] -> {Style.RESET_ALL}").strip())
+                print(f"{Fore.WHITE + Style.BRIGHT}5. Add Liquidity{Style.RESET_ALL}")
+                print(f"{Fore.WHITE + Style.BRIGHT}6. Run All Features{Style.RESET_ALL}")
+                option = int(input(f"{Fore.BLUE + Style.BRIGHT}Choose [1/2/3/4/5/6] -> {Style.RESET_ALL}").strip())
 
-                if option in [1, 2, 3, 4, 5]:
+                if option in [1, 2, 3, 4, 5, 6]:
                     option_type = (
                         "Check-In - Draw" if option == 1 else 
                         "Claim Faucet" if option == 2 else 
                         "Wrap - Unwrap" if option == 3 else 
-                        "Swap" if option == 4 else 
+                        "Swap" if option == 4 else
+                        "Add Liquidity" if option == 5 else
                         "Run All Features"
                     )
                     print(f"{Fore.GREEN + Style.BRIGHT}{option_type} Selected.{Style.RESET_ALL}")
                     break
                 else:
-                    print(f"{Fore.RED + Style.BRIGHT}Please enter either 1, 2, 3, 4 or 5.{Style.RESET_ALL}")
+                    print(f"{Fore.RED + Style.BRIGHT}Please enter either 1, 2, 3, 4, 5 or 6.{Style.RESET_ALL}")
             except ValueError:
-                print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number (1, 2, 3, 4 or 5).{Style.RESET_ALL}")
+                print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number (1, 2, 3, 4, 5 or 6).{Style.RESET_ALL}")
 
         if option == 3:
             while True:
@@ -607,7 +717,7 @@ class XOS:
                 try:
                     swap_count = int(input(f"{Fore.YELLOW + Style.BRIGHT}How Many Times Do You Want To Make a Swap? -> {Style.RESET_ALL}").strip())
                     if swap_count > 0:
-                        self.swap_count =swap_count
+                        self.swap_count = swap_count
                         break
                     else:
                         print(f"{Fore.RED + Style.BRIGHT}Please enter positive number.{Style.RESET_ALL}")
@@ -660,6 +770,49 @@ class XOS:
 
         elif option == 5:
             while True:
+                try:
+                    self.liquidity_count = int(input(f"{Fore.YELLOW + Style.BRIGHT}How Many Times Do You Want To Add Liquidity? -> {Style.RESET_ALL}").strip())
+                    if self.liquidity_count > 0:
+                        break
+                    else:
+                        print(f"{Fore.RED + Style.BRIGHT}Please enter positive number.{Style.RESET_ALL}")
+                except ValueError:
+                    print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number.{Style.RESET_ALL}")
+
+            while True:
+                try:
+                    self.liquidity_amount = float(input(f"{Fore.YELLOW + Style.BRIGHT}Liquidity Amount? [1 or 0.01 or 0.001, etc in decimals]-> {Style.RESET_ALL}").strip())
+                    if self.liquidity_amount > 0:
+                        break
+                    else:
+                        print(f"{Fore.RED + Style.BRIGHT}Amount must be greater than 0.{Style.RESET_ALL}")
+                except ValueError:
+                    print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number.{Style.RESET_ALL}")
+
+            while True:
+                try:
+                    min_delay = int(input(f"{Fore.YELLOW + Style.BRIGHT}Min Delay For Each Liquidity Tx -> {Style.RESET_ALL}").strip())
+                    if min_delay >= 0:
+                        self.min_delay = min_delay
+                        break
+                    else:
+                        print(f"{Fore.RED + Style.BRIGHT}Min Delay must be >= 0.{Style.RESET_ALL}")
+                except ValueError:
+                    print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number.{Style.RESET_ALL}")
+
+            while True:
+                try:
+                    max_delay = int(input(f"{Fore.YELLOW + Style.BRIGHT}Max Delay For Each Liquidity Tx -> {Style.RESET_ALL}").strip())
+                    if max_delay >= min_delay:
+                        self.max_delay = max_delay
+                        break
+                    else:
+                        print(f"{Fore.RED + Style.BRIGHT}Min Delay must be >= Min Delay.{Style.RESET_ALL}")
+                except ValueError:
+                    print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number.{Style.RESET_ALL}")
+
+        elif option == 6:
+            while True:
                 auto_faucet = input(f"{Fore.YELLOW + Style.BRIGHT}Auto Claim Faucet? [y/n] -> {Style.RESET_ALL}").strip()
                 if auto_faucet in ["y", "n"]:
                     if auto_faucet == "n":
@@ -679,16 +832,16 @@ class XOS:
                     if wrap_option in [1, 2, 3]:
                         wrap_type = (
                             "Wrap XOS to WXOS" if wrap_option == 1 else 
-                            "Unwrap WXOS to XOS" if wrap_option == 1 else 
+                            "Unwrap WXOS to XOS" if wrap_option == 2 else 
                             "Skipped"
                         )
                         print(f"{Fore.GREEN + Style.BRIGHT}{wrap_type} Selected.{Style.RESET_ALL}")
                         self.wrap_option = wrap_option
                         break
                     else:
-                        print(f"{Fore.RED + Style.BRIGHT}Please enter either 1 or 2.{Style.RESET_ALL}")
+                        print(f"{Fore.RED + Style.BRIGHT}Please enter either 1, 2 or 3.{Style.RESET_ALL}")
                 except ValueError:
-                    print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number (1 or 2).{Style.RESET_ALL}")
+                    print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number (1, 2 or 3).{Style.RESET_ALL}")
 
             if wrap_option in [1, 2]:
                 while True:
@@ -706,7 +859,7 @@ class XOS:
                 try:
                     swap_count = int(input(f"{Fore.YELLOW + Style.BRIGHT}How Many Times Do You Want To Make a Swap? -> {Style.RESET_ALL}").strip())
                     if swap_count > 0:
-                        self.swap_count =swap_count
+                        self.swap_count = swap_count
                         break
                     else:
                         print(f"{Fore.RED + Style.BRIGHT}Please enter positive number.{Style.RESET_ALL}")
@@ -737,7 +890,27 @@ class XOS:
 
             while True:
                 try:
-                    min_delay = int(input(f"{Fore.YELLOW + Style.BRIGHT}Min Delay For Each Swap Tx -> {Style.RESET_ALL}").strip())
+                    self.liquidity_count = int(input(f"{Fore.YELLOW + Style.BRIGHT}How Many Times Do You Want To Add Liquidity? -> {Style.RESET_ALL}").strip())
+                    if self.liquidity_count > 0:
+                        break
+                    else:
+                        print(f"{Fore.RED + Style.BRIGHT}Please enter positive number.{Style.RESET_ALL}")
+                except ValueError:
+                    print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number.{Style.RESET_ALL}")
+
+            while True:
+                try:
+                    self.liquidity_amount = float(input(f"{Fore.YELLOW + Style.BRIGHT}Liquidity Amount? [1 or 0.01 or 0.001, etc in decimals]-> {Style.RESET_ALL}").strip())
+                    if self.liquidity_amount > 0:
+                        break
+                    else:
+                        print(f"{Fore.RED + Style.BRIGHT}Amount must be greater than 0.{Style.RESET_ALL}")
+                except ValueError:
+                    print(f"{Fore.RED + Style.BRIGHT}Invalid input. Enter a number.{Style.RESET_ALL}")
+
+            while True:
+                try:
+                    min_delay = int(input(f"{Fore.YELLOW + Style.BRIGHT}Min Delay For Each Tx -> {Style.RESET_ALL}").strip())
                     if min_delay >= 0:
                         self.min_delay = min_delay
                         break
@@ -748,7 +921,7 @@ class XOS:
 
             while True:
                 try:
-                    max_delay = int(input(f"{Fore.YELLOW + Style.BRIGHT}Max Delay For Each Swap Tx -> {Style.RESET_ALL}").strip())
+                    max_delay = int(input(f"{Fore.YELLOW + Style.BRIGHT}Max Delay For Each Tx -> {Style.RESET_ALL}").strip())
                     if max_delay >= min_delay:
                         self.max_delay = max_delay
                         break
@@ -1163,6 +1336,33 @@ class XOS:
                 f"{Fore.RED+Style.BRIGHT} Perform On-Chain Failed {Style.RESET_ALL}"
             )
 
+    async def process_perform_add_liquidity(self, account: str, address: str, token0_address: str, token1_address: str, token0_name: str, token1_name: str, amount: float, use_proxy: bool):
+        tx_hash, block_number = await self.perform_add_liquidity(account, address, token0_address, token1_address, amount, amount, use_proxy)
+        if tx_hash and block_number:
+            explorer = f"https://testnet.xoscan.io/tx/{tx_hash}"
+
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Status  :{Style.RESET_ALL}"
+                f"{Fore.GREEN+Style.BRIGHT} Added {amount} {token0_name} and {amount} {token1_name} to Liquidity Pool {Style.RESET_ALL}"
+            )
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Block   :{Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {block_number} {Style.RESET_ALL}"
+            )
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Tx Hash :{Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {tx_hash} {Style.RESET_ALL}"
+            )
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Explorer:{Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {explorer} {Style.RESET_ALL}"
+            )
+        else:
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Status  :{Style.RESET_ALL}"
+                f"{Fore.RED+Style.BRIGHT} Perform On-Chain Failed {Style.RESET_ALL}"
+            )
+
     async def process_option_1(self, address: str, use_proxy: bool):
         proxy = self.get_next_proxy_for_account(address) if use_proxy else None
 
@@ -1445,6 +1645,76 @@ class XOS:
             await self.process_perform_swap(account, address, from_contract_address, to_contract_address, from_token, to_token, swap_amount, use_proxy)
             await self.print_timer()
 
+    async def process_option_5(self, account: str, address: str, use_proxy: bool):
+        self.log(f"{Fore.CYAN+Style.BRIGHT}Liquidity:{Style.RESET_ALL}                      ")
+
+        for i in range(self.liquidity_count):
+            self.log(
+                f"{Fore.MAGENTA+Style.BRIGHT}   ● {Style.RESET_ALL}"
+                f"{Fore.GREEN+Style.BRIGHT}Add Liquidity{Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {i+1} / {self.liquidity_count} {Style.RESET_ALL}                           "
+            )
+
+            token0_address, token1_address, token0_name, token1_name = self.generate_liquidity_option()
+
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Pair    :{Style.RESET_ALL}"
+                f"{Fore.GREEN+Style.BRIGHT} {token0_name} {Style.RESET_ALL}"
+                f"{Fore.MAGENTA+Style.BRIGHT}-{Style.RESET_ALL}"
+                f"{Fore.GREEN+Style.BRIGHT} {token1_name} {Style.RESET_ALL}"
+            )
+
+            xos_balance = await self.get_token_balance(address, "XOS", use_proxy)
+            token0_balance = await self.get_token_balance(address, token0_address, use_proxy)
+            token1_balance = await self.get_token_balance(address, token1_address, use_proxy)
+            tx_fees = 0.009
+
+            self.log(f"{Fore.CYAN+Style.BRIGHT}     Balance :{Style.RESET_ALL}")
+            self.log(
+                f"{Fore.BLUE+Style.BRIGHT}       ● {Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {xos_balance} XOS {Style.RESET_ALL}"
+            )
+            self.log(
+                f"{Fore.BLUE+Style.BRIGHT}       ● {Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {token0_balance} {token0_name} {Style.RESET_ALL}"
+            )
+            self.log(
+                f"{Fore.BLUE+Style.BRIGHT}       ● {Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {token1_balance} {token1_name} {Style.RESET_ALL}"
+            )
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Amount  :{Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {self.liquidity_amount} {token0_name} and {self.liquidity_amount} {token1_name} {Style.RESET_ALL}"
+            )
+            self.log(
+                f"{Fore.CYAN+Style.BRIGHT}     Tx Fees :{Style.RESET_ALL}"
+                f"{Fore.WHITE+Style.BRIGHT} {tx_fees} XOS {Style.RESET_ALL}"
+            )
+
+            if not xos_balance or xos_balance <= tx_fees:
+                self.log(
+                    f"{Fore.CYAN+Style.BRIGHT}     Status  :{Style.RESET_ALL}"
+                    f"{Fore.YELLOW+Style.BRIGHT} Insufficient XOS Token Balance {Style.RESET_ALL}"
+                )
+                return
+
+            if not token0_balance or token0_balance <= self.liquidity_amount:
+                self.log(
+                    f"{Fore.CYAN+Style.BRIGHT}     Status  :{Style.RESET_ALL}"
+                    f"{Fore.YELLOW+Style.BRIGHT} Insufficient {token0_name} Token Balance {Style.RESET_ALL}"
+                )
+                continue
+
+            if not token1_balance or token1_balance <= self.liquidity_amount:
+                self.log(
+                    f"{Fore.CYAN+Style.BRIGHT}     Status  :{Style.RESET_ALL}"
+                    f"{Fore.YELLOW+Style.BRIGHT} Insufficient {token1_name} Token Balance {Style.RESET_ALL}"
+                )
+                continue
+
+            await self.process_perform_add_liquidity(account, address, token0_address, token1_address, token0_name, token1_name, self.liquidity_amount, use_proxy)
+            await self.print_timer()
+
     async def process_accounts(self, account: str, address, option: int, use_proxy: bool, rotate_proxy: bool):
         verifed = await self.process_verify_signature(account, address, use_proxy, rotate_proxy)
         if verifed:
@@ -1462,6 +1732,9 @@ class XOS:
                 await self.process_option_4(account, address, use_proxy)
 
             elif option == 5:
+                await self.process_option_5(account, address, use_proxy)
+
+            elif option == 6:
                 await self.process_option_1(address, use_proxy)
                 await asyncio.sleep(5)
 
@@ -1472,6 +1745,9 @@ class XOS:
                 await asyncio.sleep(5)
 
                 await self.process_option_4(account, address, use_proxy)
+                await asyncio.sleep(5)
+
+                await self.process_option_5(account, address, use_proxy)
                 await asyncio.sleep(5)
     
 
