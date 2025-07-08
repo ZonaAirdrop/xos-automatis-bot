@@ -21,9 +21,9 @@
 ■ Auto Faucet Claim (Requires 2Captcha Key)  
 ■ Auto Wrap & Unwrap  
 ■ Auto Token Swapping 
-■ Auto Add Liquidity 
+■ Auto Add Liquidity   
 ■ Multi-Account Support with Threading 
-■ Auto Turu 
+■ Auto Turu       
 
 ## 🔧 How to Use
 
