@@ -45,7 +45,7 @@ class XOS:
         self.FAUCET_API = "https://faucet.x.ink/api"
         self.PAGE_URL = "https://faucet.x.ink/"
         self.SITE_KEY = "0x4AAAAAABciOCyUzm5u0xOv"
-        self.REF_CODE = "1V7NKQ" # U can change it with yours.
+        self.REF_CODE = "A6RUFB"
         self.CAPTCHA_KEY = None
         self.RPC_URL = "https://testnet-rpc.x.ink/"
         self.WXOS_CONTRACT_ADDRESS = "0x0AAB67cf6F2e99847b9A95DeC950B250D648c1BB"
