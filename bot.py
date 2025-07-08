@@ -11,6 +11,10 @@ from eth_utils import to_hex
 from web3 import Web3
 from datetime import datetime, timedelta
 from colorama import *
+from dotenv import load_dotenv
+load_dotenv()
+import os
+
 import asyncio, random, time, json, os, pytz
 
 wib = pytz.timezone('Asia/Jakarta')
@@ -162,15 +166,6 @@ class XOS:
         hours, remainder = divmod(seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
         return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
-    
-    def load_2captcha_key(self):
-        try:
-            with open("2captcha_key.txt", 'r') as file:
-                captcha_key = file.read().strip()
-
-            return captcha_key
-        except Exception as e:
-            return None
     
     async def load_proxies(self, use_proxy_choice: int):
         filename = "proxy.txt"
@@ -1482,10 +1477,9 @@ class XOS:
 
     async def main(self):
         try:
-            with open('accounts.txt', 'r') as file:
-                accounts = [line.strip() for line in file if line.strip()]
+            accounts = [key.strip() for key in os.getenv("PRIVATE_KEYS", "").split(",") if key.strip()]
 
-            captcha_key = self.load_2captcha_key()
+            captcha_key = os.getenv("CAPTCHA_KEY", "").strip()
             if captcha_key:
                 self.CAPTCHA_KEY = captcha_key
 
