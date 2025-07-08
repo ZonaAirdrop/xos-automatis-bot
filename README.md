@@ -56,3 +56,17 @@ http://user:pass@ip:port
 ```bash
 python bot.py
 ```
+
+## 🔐 Security Notice
+
+> **Always prioritize the security of your private key and RPC endpoints.**
+> This bot interacts with blockchain networks and performs automated transactions, so improper handling of sensitive credentials can lead to irreversible asset loss.
+
+### 🚫 Disclaimer
+
+This software is provided for **educational and testing purposes only**.
+The maintainers are **not responsible** for any loss, damage, or misuse caused by the use of this tool.
+
+> By using this bot, you agree that you understand the risks associated with blockchain automation, including but not limited to transaction fees, delays, and unexpected behavior due to network congestion or smart contract changes.
+
+For updates and support: https://t.me/ZonaAirdr0p
